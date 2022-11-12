@@ -7,7 +7,7 @@ public class CameraMovement : MonoBehaviour
 
     public GameObject player;
     public float cameraSpeed = 5.0f;
-    public float xPos;
+    public float xPos;public float yPos;
 
 
     // Start is called before the first frame update
@@ -22,7 +22,7 @@ public class CameraMovement : MonoBehaviour
         camPos.x = player.transform.position.x + xPos;
         transform.position = Vector2.Lerp(transform.position, camPos, 3 * Time.fixedDeltaTime);
 
-        camPos.y = player.transform.position.y;
+        camPos.y = player.transform.position.y + yPos;
         transform.position = Vector2.Lerp(transform.position, camPos, 3 * Time.fixedDeltaTime);
 
     }

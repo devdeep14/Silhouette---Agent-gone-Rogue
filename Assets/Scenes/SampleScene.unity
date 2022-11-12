@@ -1340,6 +1340,7 @@ MonoBehaviour:
   player: {fileID: 1370339632}
   cameraSpeed: 5
   xPos: 7
+  yPos: 3.5
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
