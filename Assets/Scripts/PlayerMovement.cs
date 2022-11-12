@@ -9,10 +9,14 @@ public class PlayerMovement : MonoBehaviour
     private SwipeControls swipeLogic;
     private bool isGrounded = false;
     public float jumpPower;
+    public GameObject graphics;
+    private Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
+        anim = graphics.GetComponent <Animator> ();
+        anim.SetBool ("isRunning", true);
         rb = GetComponent<Rigidbody2D>();
         swipeLogic = (SwipeControls)transform.GetComponent (typeof(SwipeControls));
 
@@ -37,17 +41,20 @@ public class PlayerMovement : MonoBehaviour
         {
             isGrounded = false;
             rb.velocity = new Vector2(0, jumpPower);
+            anim.SetBool ("isJumping", true);
         }
         else if(isGrounded == true && direction==SwipeControls.SwipeDirection.Duck)
         {
             GetComponent<CircleCollider2D>().enabled = false;
-            Invoke("StandUP", 3);
+            Invoke("StandUP", 1);
+            anim.SetBool("isSliding", true);
         }
     }
 
     public void StandUP()
     {
         GetComponent<CircleCollider2D>().enabled = true;
+        anim.SetBool("isSliding", false);
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
@@ -55,6 +62,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
         {
             isGrounded = true;
+            anim.SetBool("isJumping", false);
         }
     }
 }
