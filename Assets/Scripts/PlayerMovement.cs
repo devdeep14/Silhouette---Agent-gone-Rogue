@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
     public float jumpPower;
     public GameObject graphics;
     private Animator anim;
+
+    
 
     // Start is called before the first frame update
     void Start()
@@ -64,5 +67,14 @@ public class PlayerMovement : MonoBehaviour
             isGrounded = true;
             anim.SetBool("isJumping", false);
         }
+        if (collision.gameObject.tag == "end")    //restart code
+        {
+            SceneManager.LoadScene("SampleScene");
+        }
     }
+
+
+    
+
+   
 }
